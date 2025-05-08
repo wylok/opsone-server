@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webshell录屏</title>
+    <link rel="stylesheet" href="http://<remote_host>/api/v1/webshell/asciinema-player.min.css">
+</head>
+<body>
+  <div id="player"></div>
+  <script src="http://<remote_host>/api/v1/webshell/asciinema-player.min.js"></script>
+  <script>
+    // 静态文件播放
+    AsciinemaPlayer.create(
+      "http://<remote_host>/api/v1/webshell/<file_name>.cast",
+      document.getElementById('player')
+    );
+  </script>
+</body>
+</html>

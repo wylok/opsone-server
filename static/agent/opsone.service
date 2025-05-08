@@ -1,0 +1,15 @@
+[Unit]
+Description=opsone
+Documentation=man:systemd-opsone-generator(8)
+ConditionFileIsExecutable=/opt/opsone/opsone-dog
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/opt/opsone/opsone-dog start
+TimeoutSec=0
+RemainAfterExit=yes
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target
