@@ -8,7 +8,7 @@ import (
 
 const AgentVersion = "2025041401"
 const TenantId = "NSJBKI2w3e4rVKTT4r5tyPYG"
-const CryptKey = "4098879a2529ca11b8675505ahf88a2d"
+const CryptKey = "4797979a2929ca11b7575755ahf88a2d"
 const PublicToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzUyNjQwOTQsImlhdCI6MTYzNTI1Njg5NCwidGVuYW50X2lk" +
 	"IjoidGVzdCIsInVzZXJfaWQiOiJOU0pCS0lTVVFWVktUVFdYVVBZRyJ9.UE438SZq8_bOK4truM87yvBRq1vsTFQF7mVU0e0OaPM"
 const WscSend = "wsc_send_pool"
