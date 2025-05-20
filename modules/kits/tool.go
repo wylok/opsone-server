@@ -7,14 +7,11 @@ import (
 	"fmt"
 	"github.com/duke-git/lancet/random"
 	"github.com/spf13/cast"
-	"gorm.io/gorm"
-	"inner/modules/databases"
 	"math"
 	"reflect"
 	"runtime"
 	"strconv"
 	"strings"
-	"time"
 )
 
 func MD5(str string) string {
@@ -90,19 +87,4 @@ func FormatMonitorValue(value float64, unit string) float64 {
 	}
 	value, _ = strconv.ParseFloat(fmt.Sprintf("%.1f", value), 64)
 	return value
-}
-func SshAudit(userId, hostId, assetType, fileName string) string {
-	var auditId string
-	if userId != "" && hostId != "" {
-		auditId = RandString(12)
-		_ = db.Transaction(func(tx *gorm.DB) error {
-			sa := databases.SshAudit{AuditId: auditId, AssetId: hostId, AssetType: assetType, UserId: userId,
-				FileName: fileName, StartTime: time.Now()}
-			sqlErr := tx.Create(&sa).Error
-			sc := databases.SshContent{AuditId: auditId, ShellContent: ""}
-			sqlErr = tx.Create(&sc).Error
-			return sqlErr
-		})
-	}
-	return auditId
 }

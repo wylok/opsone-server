@@ -100,7 +100,6 @@ func ModifyK8sCluster(c *gin.Context) {
 		JsonData   k8s_conf.ModifyK8sCluster
 		Response   = common.Response{C: c}
 		K8sCluster []databases.K8sCluster
-		K8sAlarm   []databases.K8sAlarm
 	)
 	err := c.ShouldBindJSON(&JsonData)
 	// 接口请求返回结果
@@ -118,10 +117,6 @@ func ModifyK8sCluster(c *gin.Context) {
 				if err = tx.Model(&K8sCluster).Where("k8s_id=?", JsonData.K8sId).Updates(
 					databases.K8sCluster{K8sName: JsonData.K8sName, AlarmChannel: JsonData.AlarmChannel,
 						AlarmContacts: JsonData.AlarmContacts}).Error; err != nil {
-					sqlErr = err
-				}
-				if err = tx.Model(&K8sAlarm).Where("k8s_id=?", JsonData.K8sId).Updates(
-					databases.K8sAlarm{K8sName: JsonData.K8sName}).Error; err != nil {
 					sqlErr = err
 				}
 				return sqlErr
@@ -145,7 +140,6 @@ func DelK8sCluster(c *gin.Context) {
 	var (
 		JsonData   k8s_conf.DelK8sCluster
 		K8sCluster []databases.K8sCluster
-		K8sAlarm   []databases.K8sAlarm
 		Response   = common.Response{C: c}
 	)
 	err := c.ShouldBindJSON(&JsonData)
@@ -159,6 +153,5 @@ func DelK8sCluster(c *gin.Context) {
 	}()
 	if err == nil {
 		db.Where("k8s_id = ? and k8s_name = ?", JsonData.K8sID, JsonData.K8sName).Delete(&K8sCluster)
-		db.Where("k8s_id = ? and k8s_name = ?", JsonData.K8sID, JsonData.K8sName).Delete(&K8sAlarm)
 	}
 }

@@ -1,7 +1,5 @@
 package databases
 
-import "time"
-
 type AgentConf struct {
 	Id                uint64 `gorm:"primary_key" json:"id"`
 	AgentVersion      string `gorm:"column:agent_version;type:varchar(100)" json:"agent_version"`
