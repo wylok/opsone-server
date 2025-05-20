@@ -123,7 +123,4 @@ func init() {
 	err = DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&WorkOrderType{})
 	err = DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&GroupProcess{})
 	err = DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&K8sCluster{})
-	err = DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&K8sAlarm{})
-	err = DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&SshAudit{})
-	err = DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&SshContent{})
 }

@@ -29,27 +29,3 @@ type AgentAlive struct {
 func (AgentAlive) TableName() string {
 	return "agent_alive"
 }
-
-type SshAudit struct {
-	Id        uint64    `gorm:"primary_key" json:"id"`
-	AuditId   string    `gorm:"column:audit_id;type:varchar(100);uniqueIndex" json:"audit_id"`
-	AssetId   string    `gorm:"column:asset_id;type:varchar(100);index" json:"asset_id"`
-	AssetType string    `gorm:"column:asset_type;type:varchar(100);index" json:"asset_type"`
-	UserId    string    `gorm:"column:user_id;type:varchar(100);index" json:"user_id"`
-	FileName  string    `gorm:"column:file_name;type:varchar(100)" json:"file_name"`
-	StartTime time.Time `gorm:"column:start_time;type:datetime" json:"start_time"`
-}
-
-func (SshAudit) TableName() string {
-	return "ssh_audit"
-}
-
-type SshContent struct {
-	Id           uint64 `gorm:"primary_key" json:"id"`
-	AuditId      string `gorm:"column:audit_id;type:varchar(100);uniqueIndex" json:"audit_id"`
-	ShellContent string `gorm:"column:shell_content;type:text" json:"shell_content"`
-}
-
-func (SshContent) TableName() string {
-	return "ssh_content"
-}
