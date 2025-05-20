@@ -6,7 +6,6 @@ import (
 	"github.com/golang-module/carbon"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
-	"github.com/tpretz/go-zabbix-api"
 	"gorm.io/gorm"
 	"inner/conf/monitor_conf"
 	"inner/conf/platform_conf"
@@ -707,30 +706,5 @@ func MonitorHandle() {
 				}
 			}
 		}
-	}
-}
-
-func SyncZabbix() {
-	user := "Admin"
-	pass := "rgyun@2022"
-	uri := ""
-	api, _ := zabbix.NewAPI(zabbix.Config{Url: "http://" + uri + "/api_jsonrpc.php",
-		TlsNoVerify: false, Serialize: true, Version: 6})
-	_, err := api.Login(user, pass)
-	if err == nil {
-		version, err := api.Version()
-		Log.Debug(version)
-		call, err := api.Call("problem.get", map[string]interface{}{
-			"output":                "extend",
-			"selectAcknowledges":    "extend",
-			"selectTags":            "extend",
-			"selectSuppressionData": "extend",
-			"recent":                "true",
-			"sortfield":             []string{"eventid"},
-			"sortorder":             "DESC"})
-		if err == nil {
-			Log.Debug(call.Result)
-		}
-		Log.Error(err)
 	}
 }
