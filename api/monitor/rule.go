@@ -19,7 +19,7 @@ import (
 // @Accept  json
 // @Produce  json
 // @Security ApiKeyAuth
-// @Param body body  body monitor_conf.CreateRule true "json数据"
+// @Param body body monitor_conf.CreateRule true "json数据"
 // @Success 200 {} json "{success:true,message:"ok",data:null}"
 // @Router /api/v1/monitor/rule [post]
 func CreateRule(c *gin.Context) {
