@@ -114,7 +114,7 @@ func SendMsg(data map[string]interface{}) {
 }
 
 func LocalWscSend() {
-	//获取wsc消息下发到主机
+	//本机wsc消息直接下发
 	for {
 		data := <-platform_conf.Wch
 		if data != nil {
@@ -131,8 +131,8 @@ func LocalWscSend() {
 	}
 }
 
-func ShareWscSend() {
-	//获取wsc消息下发到主机
+func PoolsWscSend() {
+	//获取wsc池本机消息下发
 	for {
 		for k, v := range rc.HGetAll(ctx, platform_conf.WscSend).Val() {
 			data := kits.StringToMap(v)

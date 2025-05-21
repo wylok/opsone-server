@@ -15,7 +15,7 @@ var (
 
 func init() {
 	go LocalWscSend()
-	go ShareWscSend()
+	go PoolsWscSend()
 	go HeartBeatHandle()
 	go RsyncAgentConf()
 	go CleanAuditFile()
