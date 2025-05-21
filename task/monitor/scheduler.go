@@ -33,7 +33,6 @@ func Scheduler() {
 		c.AddFunc(v, mt.SyncMonitorTrend, "SyncMonitorTrend_"+k)
 	}
 	c.AddFunc("0 * * * * *", ServerHealth, "ServerHealth")
-	//c.AddFunc("0 */5 * * * *", SyncZabbix, "SyncZabbix")
 	c.Start()
 	log.Info("monitor scheduler start working ......")
 }
