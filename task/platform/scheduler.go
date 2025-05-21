@@ -18,7 +18,6 @@ func init() {
 	go PoolsWscSend()
 	go HeartBeatHandle()
 	go RsyncAgentConf()
-	go CleanAuditFile()
 	go Scheduler()
 }
 func Scheduler() {

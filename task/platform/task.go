@@ -273,35 +273,6 @@ func RsyncAgentConf() {
 		time.Sleep(15 * time.Second)
 	}
 }
-func CleanAuditFile() {
-	//定期清理ssh审计录像临时文件
-	for {
-		func() {
-			defer func() {
-				if err := recover(); err != nil {
-					Log.Error(err)
-				}
-			}()
-			filePath := platform_conf.RootPath + "/opsone/static/webshell"
-			if fileutil.IsExist(filePath) {
-				files, err := fileutil.ListFileNames(filePath)
-				if err == nil {
-					for _, f := range files {
-						if strings.Contains(f, "index-") || strings.Contains(f, ".cast") {
-							mTime, err := fileutil.MTime(filePath + "/" + f)
-							if err == nil {
-								if time.Now().Add(-30*time.Minute).Unix() > mTime {
-									_ = fileutil.RemoveFile(filePath + "/" + f)
-								}
-							}
-						}
-					}
-				}
-			}
-		}()
-		time.Sleep(30 * time.Minute)
-	}
-}
 func GetRemoteIp() {
 	path := platform_conf.RootPath + "/opsone/static"
 	p := path + "/config/config.ini"
