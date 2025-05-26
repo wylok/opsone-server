@@ -281,8 +281,10 @@ func GetRemoteIp() {
 		remoteIp = strings.TrimSpace(remoteIp)
 		if netutil.IsInternalIP(net.ParseIP(remoteIp)) || netutil.IsPublicIP(net.ParseIP(remoteIp)) {
 			if platform_conf.RemoteAddr != remoteIp {
+				if platform_conf.RemoteAddr != "" {
+					err = kits.ModifyFileContent(platform_conf.RemoteAddr, remoteIp, f)
+				}
 				err = kits.ModifyFileContent("<remote_ip>", remoteIp, f)
-				err = kits.ModifyFileContent(platform_conf.RemoteAddr, remoteIp, f)
 				platform_conf.RemoteAddr = remoteIp
 			}
 		}
