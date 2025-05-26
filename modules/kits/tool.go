@@ -4,8 +4,10 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/duke-git/lancet/random"
+	"github.com/duke-git/lancet/v2/fileutil"
 	"github.com/spf13/cast"
 	"math"
 	"reflect"
@@ -87,4 +89,20 @@ func FormatMonitorValue(value float64, unit string) float64 {
 	}
 	value, _ = strconv.ParseFloat(fmt.Sprintf("%.1f", value), 64)
 	return value
+}
+func ModifyFileContent(oldString, newString, file string) error {
+	var (
+		err        error
+		fileString string
+	)
+	if fileutil.IsExist(file) && oldString != newString {
+		fileString, err = fileutil.ReadFileToString(file)
+		if err == nil {
+			err = fileutil.WriteStringToFile(file,
+				strings.ReplaceAll(fileString, oldString, newString), false)
+		}
+	} else {
+		err = errors.New("参数错误")
+	}
+	return err
 }

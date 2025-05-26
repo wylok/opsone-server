@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/duke-git/lancet/netutil"
 	"github.com/duke-git/lancet/v2/fileutil"
-	"github.com/duke-git/lancet/v2/system"
 	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
@@ -282,8 +281,8 @@ func GetRemoteIp() {
 		remoteIp = strings.TrimSpace(remoteIp)
 		if netutil.IsInternalIP(net.ParseIP(remoteIp)) || netutil.IsPublicIP(net.ParseIP(remoteIp)) {
 			if platform_conf.RemoteAddr != remoteIp {
-				_, _, err = system.ExecCommand("sed -i 's/" + platform_conf.RemoteAddr + "/" + remoteIp + "/g' " + f)
-				_, _, err = system.ExecCommand("sed -i 's/<remote_ip>/" + remoteIp + "/g' " + f)
+				err = kits.ModifyFileContent("<remote_ip>", remoteIp, f)
+				err = kits.ModifyFileContent(platform_conf.RemoteAddr, remoteIp, f)
 				platform_conf.RemoteAddr = remoteIp
 			}
 		}
