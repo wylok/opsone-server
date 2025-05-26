@@ -22,7 +22,7 @@ func init() {
 }
 func Scheduler() {
 	c := cron.New()
-	c.AddFunc("*/5 * * * * *", GetRemoteIp, "GetRemoteIp")
+	c.AddFunc("*/5 * * * * *", ModifyRemoteAddr, "ModifyRemoteAddr")
 	c.Start()
 	Log.Info("platform scheduler start working ......")
 }

@@ -272,7 +272,7 @@ func RsyncAgentConf() {
 		time.Sleep(15 * time.Second)
 	}
 }
-func GetRemoteIp() {
+func ModifyRemoteAddr() {
 	path := platform_conf.RootPath + "/opsone/static"
 	p := path + "/config/config.ini"
 	f := path + "/agent/install.sh"
